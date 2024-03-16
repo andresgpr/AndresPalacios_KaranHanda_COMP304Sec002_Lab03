@@ -43,7 +43,7 @@ class FullScheduleFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val busStopAdapter = AirLineAdapter({
+        val busStopAdapter = AirLineAdapter( {
             val action = FullScheduleFragmentDirections
                 .actionFullScheduleFragmentToStopScheduleFragment(
                     airlineName = it.airlineName
@@ -57,6 +57,8 @@ class FullScheduleFragment: Fragment() {
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

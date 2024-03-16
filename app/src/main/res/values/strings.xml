@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab03</string>
+    <string name="app_name">Airline Schedule</string>
     <!-- Shown above left column listing bus stops in full schedule fragment -->
     <string name="airline_header">Airline Name</string>
     <!-- Shown above right column listing arrival times in full schedule fragment -->

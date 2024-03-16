@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
@@ -56,16 +57,19 @@ class DetailScheduleFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val busStopAdapter = AirLineAdapter({})
-        // by passing in the stop name, filtered results are returned,
-        // and tapping rows won't trigger navigation
+
+        // Initialize the adapter with isStatusVisible set to true to show the status
+        val busStopAdapter = AirLineAdapter(onItemClicked = { /* Handle item click if necessary */ }, statusDetails = true)
+
         recyclerView.adapter = busStopAdapter
         lifecycle.coroutineScope.launch {
-            viewModel.scheduleForAirlineName(airLineName).collect() {
-                busStopAdapter.submitList(it)
+            viewModel.scheduleForAirlineName(airLineName).collect { schedules ->
+                busStopAdapter.submitList(schedules)
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
